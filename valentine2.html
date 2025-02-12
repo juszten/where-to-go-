@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Valentine’s Date ❤️</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffe6e6;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1, h2 {
+            color: #ff3366;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+        .choice-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Thank you for being my Valentine! 💖</h1>
+    <h2>What are we going to do?</h2>
+    <button class="choice-btn" onclick="chooseActivity('freaky')">Do something freaky 😏</button>
+    <button class="choice-btn" onclick="chooseActivity('eat')">Eat outside 🍽️</button>
+    
+    <div id="nextStep"></div>
+    
+    <script>
+        function chooseActivity(activity) {
+            let nextStep = document.getElementById("nextStep");
+            if (activity === 'freaky') {
+                nextStep.innerHTML = "<h2>Ohh, so you like it spicy? 🌶️🔥</h2><p>I'll make sure it's unforgettable 😉</p>";
+                sendAnswer("Chose: Something freaky 😏");
+            } else {
+                nextStep.innerHTML = "<h2>Where do you want to eat?</h2>
+                    <button class='choice-btn' onclick='chooseRestaurant("Momo's Comfort Food")'>Momo's Comfort Food 🍜</button>
+                    <button class='choice-btn' onclick='chooseRestaurant("Coloseo")'>Coloseo 🍕</button>";
+            }
+        }
+
+        function chooseRestaurant(restaurant) {
+            let nextStep = document.getElementById("nextStep");
+            nextStep.innerHTML = `<h2>What time? ⏰</h2>
+                <button class='choice-btn' onclick='chooseTime("Lunch", "${restaurant}")'>Lunch</button>
+                <button class='choice-btn' onclick='chooseTime("Dinner", "${restaurant}")'>Dinner</button>`;
+        }
+        
+        function chooseTime(time, restaurant) {
+            document.getElementById("nextStep").innerHTML = `<h2>Thank you! 💕 See you at ${restaurant} for ${time}! 😘</h2>`;
+            sendAnswer(`Chose: Eat outside at ${restaurant}, Time: ${time}`);
+        }
+        
+        function sendAnswer(answer) {
+            // Simulating sending the answer via Messenger (Replace with actual implementation)
+            console.log("Sending answer to Messenger: " + answer);
+            alert("Your choice has been sent to me! ❤️");
+        }
+    </script>
+</body>
+</html>
