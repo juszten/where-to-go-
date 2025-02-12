@@ -26,9 +26,18 @@
             cursor: pointer;
             margin: 10px;
             transition: 0.3s;
+            background-color: #ff6699;
+            color: white;
         }
         .choice-btn:hover {
             transform: scale(1.1);
+        }
+        .hidden {
+            display: none;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
@@ -43,14 +52,40 @@
     <script>
         function chooseActivity(activity) {
             let nextStep = document.getElementById("nextStep");
+            nextStep.style.animation = "fadeIn 1s";
             if (activity === 'freaky') {
-                nextStep.innerHTML = "<h2>Ohh, so you like it spicy? 🌶️🔥</h2><p>I'll make sure it's unforgettable 😉</p>";
-                sendAnswer("Chose: Something freaky 😏");
+                nextStep.innerHTML = `<h2>Ohh, so you like it spicy? 🌶️🔥</h2>
+                    <h2>Raw or Protected? 😏</h2>
+                    <button class='choice-btn' onclick='chooseProtection("Raw")'>Raw 🍑</button>
+                    <button class='choice-btn' onclick='chooseProtection("Protected")'>Protected 🛡️</button>`;
             } else {
                 nextStep.innerHTML = `<h2>Where do you want to eat?</h2>
                     <button class='choice-btn' onclick='chooseRestaurant("Momo's Comfort Food")'>Momo's Comfort Food 🍜</button>
                     <button class='choice-btn' onclick='chooseRestaurant("Coloseo")'>Coloseo 🍕</button>`;
             }
+        }
+
+        function chooseProtection(protection) {
+            let nextStep = document.getElementById("nextStep");
+            nextStep.innerHTML = `<h2>Nice choice! Now, pick a position 😏</h2>
+                <button class='choice-btn' onclick='choosePosition("Missionary")'>Missionary 🤍</button>
+                <button class='choice-btn' onclick='choosePosition("Doggy")'>Doggy 🐶</button>
+                <button class='choice-btn' onclick='choosePosition("Cowgirl")'>Cowgirl 🤠</button>`;
+        }
+
+        function choosePosition(position) {
+            let nextStep = document.getElementById("nextStep");
+            nextStep.innerHTML = `<h2>Spicy choice! How many rounds? 🔥</h2>
+                <button class='choice-btn' onclick='finalStep("1")'>1 Round 🔥</button>
+                <button class='choice-btn' onclick='finalStep("2-3")'>2-3 Rounds 😏</button>
+                <button class='choice-btn' onclick='finalStep("Endless")'>Endless 💦</button>`;
+        }
+
+        function finalStep(rounds) {
+            setTimeout(() => {
+                document.getElementById("nextStep").innerHTML = `<h2>Damn, you're wild! 😈🔥</h2>
+                    <p>Message me what your answers were! ❤️</p>`;
+            }, 1500);
         }
 
         function chooseRestaurant(restaurant) {
@@ -61,13 +96,9 @@
         }
         
         function chooseTime(time, restaurant) {
-            document.getElementById("nextStep").innerHTML = `<h2>Thank you! 💕 See you at ${restaurant} for ${time}! 😘</h2>`;
-            sendAnswer(`Chose: Eat outside at ${restaurant}, Time: ${time}`);
-        }
-        
-        function sendAnswer(answer) {
-            console.log("Sending answer to Messenger: " + answer);
-            alert("Your choice has been sent to me! ❤️");
+            setTimeout(() => {
+                document.getElementById("nextStep").innerHTML = `<h2>Thank you! 💕 See you at ${restaurant} for ${time}! 😘</h2><p>Message me what your answers were! ❤️</p>`;
+            }, 1500);
         }
     </script>
 </body>
